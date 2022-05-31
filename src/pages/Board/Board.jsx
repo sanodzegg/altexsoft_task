@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Board.scss";
 import { useBoard } from "./hook/useBoard";
@@ -11,6 +11,7 @@ const Board = () => {
     playerOne: {},
     playerTwo: {},
   });
+  
   const [player, setSelectedPlayer] = useState();
   const [selectedFightersQty, setSelectedFightersQty] = useState(0);
 
@@ -20,11 +21,14 @@ const Board = () => {
     getFighterInfo(id);
     setSelectedPlayer(player);
     setSelectedFightersQty(selectedFightersQty + 1);
+    getFighterInfo(id).then(res => {
+      setFightersData(({
+        ...selectedFightersData,
+        [player]: res.data
+      }))
+    })
   };
-
-  // TODO add logic for setting selectedFightersData
-  // need for showing selected fighters with their details
-
+  
   return (
     <>
       {isLoading ? (

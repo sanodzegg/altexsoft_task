@@ -21,7 +21,6 @@ export const useBoard = () => {
   const [fighterRes, getFighterInfo] = useDataFetch({
     fetchHandler: async (id) => {
       const res = await getFighter(id);
-
       return {
         data: res.data,
       };
@@ -35,5 +34,10 @@ export const useBoard = () => {
     [JSON.stringify(fighterRes.data)]
   );
 
-  return { fighters, fighter: fighterMemo, getFighterInfo, isLoading };
+  return {
+    fighters,
+    fighter: fighterMemo,
+    getFighterInfo,
+    isLoading,
+  };
 };
